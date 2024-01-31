@@ -1,9 +1,11 @@
 import Image from "next/image";
 import { FiSearch } from "react-icons/fi";
+import Navbar from "./components/navbar";
 
 export default function Home() {
   return (
     <main className="relative h-screen w-screen">
+      <Navbar />
       <div className="flex h-full w-full items-center justify-around bg-[#EEE7FE]">
         {/* Card */}
         <div className="flex h-[80%] w-[90%] justify-around rounded-2xl bg-gradient-to-br from-[#A57EF7] to-[#6265D7] px-[10%] py-[5%] shadow-xl">
