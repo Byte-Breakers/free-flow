@@ -12,7 +12,7 @@ const Navbar = () => {
       </div>
       {/* Login Button or Profile Button */}
       {/* !CODE TO BE EDITED */}
-      <button className='bg-[#6265D7] text-sm h-9 px-4 py-2 text-white font-medium flex items-center rounded-md'>Login</button>
+      <button className='bg-[#6265D7] text-sm h-9 px-4 py-2 text-white font-medium flex items-center rounded-md' >Login</button>
     </div>
   )
 }
