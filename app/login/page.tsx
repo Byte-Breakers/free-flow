@@ -18,9 +18,7 @@ const LoginPage = () => {
       <div className='h-[92vh] bg-[#EEE7FE] flex flex-col items-center justify-center'>
         <h1 className='font-semibold text-xl'>Login via Google</h1>
         <button className='w-24 mt-2 py-1 bg-[#6265D7] rounded-md text-white'> Login </button>
-        <div className='h-8' />
-        <h1 className='font-semibold text-xl'>Create an account</h1>
-        <button className='w-24 mt-2 rounded-md border-2 border-[#6265D7] border-opacity-50 py-1 bg-white'> Google </button>
+       
       </div>
     </>
   )
