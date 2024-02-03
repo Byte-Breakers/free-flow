@@ -7,7 +7,7 @@ const LoginPage = () => {
   return (
     <>
       {/* Navbar Section */}
-      <div className='px-4 h-14 w-full bg-[grey] border-b-2 border-[#6265D7] border-opacity-10 flex justify-between items-center'>
+      <div className='px-4 h-14 w-full bg-[#eee7fe] border-b-2 border-[#6265D7] border-opacity-10 flex justify-between items-center'>
         {/* Logo & Name */}
         <Link href={'/'} className='flex items-center h-full'>
           <Image width={50} height={50} src="/logo.svg" alt="Logo" />

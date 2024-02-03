@@ -49,7 +49,7 @@ export default function Home() {
             >
               <div className="flex items-center relative">
                 <div className="icon-wrapper absolute inset-y-0 left-2 flex items-center justify-center">
-                  <FiSearch className="bg-[#EEE7FE]" />
+                  <FiSearch className="text-gray-600" />
                 </div>
                 <input
                   type="search"
