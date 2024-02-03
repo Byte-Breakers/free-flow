@@ -3,6 +3,8 @@ import Image from "next/image";
 import { FiSearch } from "react-icons/fi";
 import Navbar from "./components/navbar";
 import { useState } from "react";
+import LandingPageDesktop from "./components/landingDesktop";
+import LandingPageMobile from "./components/landingMobile";
 
 export default function Home() {
   const [searchValue, setSearchValue] = useState(""); 
@@ -47,7 +49,7 @@ export default function Home() {
             >
               <div className="flex items-center relative">
                 <div className="icon-wrapper absolute inset-y-0 left-2 flex items-center justify-center">
-                  <FiSearch className="text-gray-600" />
+                  <FiSearch className="bg-[#EEE7FE]" />
                 </div>
                 <input
                   type="search"
@@ -80,6 +82,8 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <LandingPageDesktop />
+      <LandingPageMobile/>
     </main>
   );
 }
