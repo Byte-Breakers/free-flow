@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
 
 const LoginPage = () => {
   return (
@@ -15,13 +14,13 @@ const LoginPage = () => {
           <h1 className='font-bold text-xl text-[#F88F4F]'>Flow</h1>
         </Link>
       </div>
+
       {/* Login Section */}
-      <div className='h-[92vh] bg-[#EEE7FE] flex flex-col items-center justify-center '>
-        <h1 className='font-semibold text-xl'>
-          Login via Google
-        </h1>
-        <button className='w-24 mt-2 py-1 bg-[#6265D7] rounded-md text-white transition duration-300 ease-in-out hover:bg-blue-600 transform hover:-translate-y-0.5 hover:scale-105'>
-          Login
+      <div className='h-[92vh] bg-[#EEE7FE] flex flex-col items-center justify-center'>
+        <h1 className='font-semibold text-xl'>Sign in</h1>
+        <button className='w-full max-w-[300px] mt-2 py-1 h-14 bg-[#EEE7FE] border-2 border-black  rounded-md text-white flex items-center justify-center transition duration-300 ease-in-out hover:bg-blue-600 transform hover:-translate-y-0.5 hover:scale-105'>
+          <Image src="/google.png" alt='Google Icon' width={35} height={30} className='mr-2' />
+            <h1 className='font-semibold text-xl text-black'>Sign in with Google</h1>
         </button>
       </div>
     </>

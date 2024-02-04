@@ -37,4 +37,4 @@ const LandingPageMobile = () => {
     )
 }
 
-export default LandingPageMobile
+export default LandingPageMobile;
