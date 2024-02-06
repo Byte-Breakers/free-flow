@@ -19,9 +19,9 @@ const LandingPageMobile = () => {
     };
 
     return (
-        <div className="flex md:hidden h-[91dvh] w-full items-center justify-around bg-[#EEE7FE]">
+        <div className="flex md:hidden h-[91dvh] w-full items-center justify-around bg-light-bg">
             {/* Card */}
-            <div className="flex flex-col items-center justify-center h-[80%] w-[90%] rounded-2xl bg-gradient-to-br from-[#A57EF7] to-[#6265D7] px-[4%] py-[5%] shadow-xl">
+            <div className="flex flex-col items-center justify-center h-[80%] w-[90%] rounded-2xl bg-gradient-to-br from-main-purple2 to-main-purple1 px-[4%] py-[5%] shadow-xl">
                 {/* Illustration */}
                 <div className="relative h-1/2 w-full ">
                     <Image fill src="/mainIllustration.svg" alt="logo" />
@@ -63,7 +63,7 @@ const LandingPageMobile = () => {
                 />
               </div>
             </form>
-                    <button className="rounded-md mt-2 py-1 bg-white w-[30%] text-sm font-medium text-[#6265D7]">
+                    <button className="rounded-md mt-2 py-1 bg-white w-[30%] text-sm font-medium text-main-purple1">
                         Search</button>
                 </div>
             </div>

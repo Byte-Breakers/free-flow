@@ -25,7 +25,6 @@ export default function Home() {
   return (
     <main className="relative h-screen w-screen">
       <Navbar />
-
       <LandingPageDesktop />
       <LandingPageMobile/>
     </main>

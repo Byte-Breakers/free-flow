@@ -20,9 +20,9 @@ export default function LandingPageDesktop() {
   };
   
   return (
-    <div className="hidden md:flex h-[92dvh] w-full items-center justify-around bg-[#EEE7FE]">
+    <div className="hidden md:flex h-[92dvh] w-full items-center justify-around bg-light-bg">
         {/* Card */}
-        <div className="flex h-[80%] w-[90%] justify-around rounded-2xl bg-gradient-to-br from-[#A57EF7] to-[#6265D7] px-[10%] py-[5%] shadow-xl">
+        <div className="flex h-[80%] w-[90%] justify-around rounded-2xl bg-gradient-to-br from-main-purple2 to-main-purple1 px-[10%] py-[5%] shadow-xl">
           {/* Hero Section */}
           <div className="flex  h-full w-[40%] flex-col justify-center">
             {/* AI Search Heading */}
@@ -63,7 +63,7 @@ export default function LandingPageDesktop() {
               <div className="w-[2%]" />
               <button
                 type="submit"
-                className="rounded-md bg-white px-3 text-sm font-medium text-[#6265D7]"
+                className="rounded-md bg-white px-3 text-sm font-medium text-main-purple1"
               >
                 Search
               </button>
