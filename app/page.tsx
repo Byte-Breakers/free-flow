@@ -23,7 +23,7 @@ export default function Home() {
   };
 
   return (
-    <main className="relative h-screen w-screen">
+    <main className="relative pt-14 h-screen w-screen">
       <Navbar />
       <LandingPageDesktop />
       <LandingPageMobile/>

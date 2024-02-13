@@ -20,7 +20,7 @@ export default function LandingPageDesktop() {
   };
   
   return (
-    <div className="hidden md:flex h-[92dvh] w-full items-center justify-around bg-light-bg">
+    <div className="hidden md:flex h-[100%] w-full items-center justify-center bg-light-bg">
         {/* Card */}
         <div className="flex h-[80%] w-[90%] justify-around rounded-2xl bg-gradient-to-br from-main-purple2 to-main-purple1 px-[10%] py-[5%] shadow-xl">
           {/* Hero Section */}
