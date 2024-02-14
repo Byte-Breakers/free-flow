@@ -1,93 +1,119 @@
-"use client"
-import React from 'react'
-import Navbar from '../components/navbar'
-import { FiSearch } from 'react-icons/fi';
-import { useState } from 'react';
-import LinkCard from '../components/linkCard';
+"use client";
+import React, { useState, useRef } from "react";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import Navbar from "../components/navbar";
+import { FiSearch } from "react-icons/fi";
+import LinkCard from "../components/linkCard";
 
 const HomePage = () => {
-  const [searchValue, setSearchValue] = useState("");
-  const [isValidSearch, setIsValidSearch] = useState(true);
+  const [inputText, setInputText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const API_KEY = "AIzaSyAWVRHDYSUt73oh-8cJq1l7lpu_FUyiJB8";
 
-  const handleSearch = () => {
-    if (searchValue.trim() === "") {
+  interface Link {
+    title: string;
+    url: string;
+    thumbnail: string;
+  }
 
-      setIsValidSearch(false);
-    } else {
+  const [links, setLinks] = useState<Link[]>([]);
 
-      console.log("Performing search for:", searchValue);
+  const handleGenerate = async () => {
+    if (!inputText.trim()) {
+      alert("Please enter a course name");
+      return;
+    }
 
-      setIsValidSearch(true);
+    try {
+      setIsLoading(true);
+      const genAI = new GoogleGenerativeAI(API_KEY);
+      const parsedLinks: Link[] = [];
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      const inputPrompt = `Give me at least 20 links of free ${inputText} courses. And they all have to be free of cost. The output has to be only the links in COMMA SEPARATED FORMAT ONLY, not even serial numbers or in bullets.`;
+      const result = await model.generateContent(inputPrompt);
+      const response = await result.response;
+      const generatedText = response.text();
+
+      generatedText.split(",").forEach((link) => {
+        parsedLinks.push({
+          title: link,
+          url: link,
+          thumbnail: "",
+        });
+      });
+      setLinks(parsedLinks);
+    } catch (error) {
+      console.error("Error generating content:", error);
+      alert("An error occurred. Please try again later.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  interface Link {
-    title: string,
-    thumbnail: string
-  }
-
-  const links: Link[] = [
-    {
-      title: "5 Javascripts concepts that everyone should know",
-      thumbnail: "/google.png",
-    },
-    {
-      title: "5 Javascripts concepts that everyone should know",
-      thumbnail: "/google.png",
-    },
-    {
-      title: "5 Javascripts concepts that everyone should know",
-      thumbnail: "/google.png",
-    },
-  ]
+  const handleClear = () => {
+    setInputText("");
+    inputRef.current?.focus();
+  };
 
   return (
-    <div className="w-screen h-screen bg-light-bg flex flex-col items-center mt-14">
+    <div className="mt-14 flex max-h-fit min-h-screen w-screen flex-col items-center bg-light-bg">
       <Navbar />
       {/* Headin */}
-      <h1 className='text-3xl mt-5 mb-2 font-semibold'>Search for your favorite Course</h1>
+      <h1 className="mb-2 mt-5 text-3xl font-semibold">
+        Search for your favorite Course
+      </h1>
       {/* Search bar and button */}
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          handleSearch();
+          handleGenerate();
         }}
-        className="flex h-8 mt-3 relative"
+        className="relative mt-3 flex h-8"
       >
-        <div className="flex items-center relative">
+        <div className="relative flex items-center">
           <div className="icon-wrapper absolute inset-y-0 left-2 flex items-center justify-center">
             <FiSearch className="text-gray-600" />
           </div>
           <input
             type="search"
-            className={`rounded-md px-3 text-sm bg-white align-baseline shadow-inner border-2 border-main-purple1 border-opacity-40 text-center w-full h-9 xl:w-60 ${!isValidSearch ? "border-red-500" : ""
-              }`}
+            className="h-9 w-full rounded-md border-2 border-main-purple1 border-opacity-40 bg-white px-3 text-center align-baseline text-sm shadow-inner xl:w-60"
             placeholder="Search for a course"
-            value={searchValue}
+            value={inputText}
             onChange={(e) => {
-              setSearchValue(e.target.value);
-              setIsValidSearch(true);
+              setInputText(e.target.value);
             }}
           />
         </div>
         <div className="w-[2%] pl-3" />
         <button
+          type="reset"
+          className="rounded-md bg-white px-3 text-sm font-medium text-main-purple1 "
+          onClick={handleClear}
+        >
+          Clear
+        </button>
+        <button
           type="submit"
-          className="rounded-md bg-main-purple1 px-3 text-sm font-medium text-white"
+          className="ml-2 rounded-md bg-main-purple1 px-3 text-sm font-medium text-white"
         >
           Search
         </button>
       </form>
       {/* Courses LinkCard */}
-      <div className='md:grid md:grid-cols-2 gap-x-5 gap-y-2'>
-      {
-        links.map((link) => {
-          return <LinkCard title={link.title} thumbnail={link.thumbnail} />
-        })
-      }
+      <div className="gap-x-5 gap-y-2 md:grid md:grid-cols-2">
+        {isLoading ? (
+          <div className="flex items-center justify-center">
+            <div className="mx-auto h-8 w-8 animate-spin rounded-full border-b-8 border-t-8 border-blue-800"></div>
+          </div>
+        ) : (
+          links.map((link) => {
+            return <LinkCard title={link.title} url={link.url} />;
+          })
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
