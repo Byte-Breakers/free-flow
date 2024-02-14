@@ -42,7 +42,7 @@ const HomePage = () => {
       const genAI = new GoogleGenerativeAI(API_KEY);
       const parsedLinks: Link[] = [];
       const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
-      const inputPrompt = `Give me at least 20 links of free ${inputText} courses. And they all have to be free of cost. The output has to be only the links in COMMA SEPARATED FORMAT ONLY, not even serial numbers or in bullets.`;
+      const inputPrompt = `Give me at least 10 links of free ${inputText} courses. And they all have to be free of cost. The output has to be only the links in COMMA SEPARATED FORMAT ONLY, not even serial numbers or in bullets.`;
       const result = await model.generateContent(inputPrompt);
       const response = await result.response;
       const generatedText = response.text();
@@ -50,7 +50,7 @@ const HomePage = () => {
       // the output by the ai is a string of comma separated links. We separate each link and push it to an array
       generatedText.split(',').forEach((link) => {
         parsedLinks.push({
-          title: link,
+          title: link, // TO BE CHANGED - Ankith
           url: link,
           // thumbnail: '',
         });
