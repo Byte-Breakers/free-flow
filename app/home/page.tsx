@@ -4,6 +4,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import Navbar from '../components/navbar'
 import { FiSearch } from 'react-icons/fi';
 import LinkCard from '../components/linkCard';
+import Loading from '../components/Loading';
 
 const HomePage = () => {
   // inputText is the variable which takes in the course name
@@ -130,12 +131,10 @@ const HomePage = () => {
 
       {/* The list of Courses is displayed as a list of LinkCard components */}
       <div className='md:grid md:grid-cols-2 gap-x-5 gap-y-2'>
-        
+
         {isLoading ? ( // If the is loading variable value is true then display the loading animation
 
-          <div className="flex items-center justify-center">
-            <div className="animate-spin mx-auto border-t-8 border-b-8 border-blue-800 rounded-full h-8 w-8"></div>
-          </div>
+          <Loading />
 
         ) : ( // Else display the list of the courses
 
