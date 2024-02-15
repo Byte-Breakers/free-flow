@@ -19,6 +19,8 @@ const Navbar = () => {
   const [user, setUser] = useState<User | null>(null);
   const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
   const [showFinalLogoutConfirmation, setShowFinalLogoutConfirmation] = useState(false);
+  const [showProfileIcon , setShowProfileIcon] = useState(false);
+  
 
   // Use ref to manage profile popup visibility
   const profilePopupRef = useRef<HTMLDivElement | null>(null);
@@ -125,17 +127,21 @@ const Navbar = () => {
           </button>
         </div>
       )}
-
+      <div className = 'flex-items:center'>
       <button
         onClick={handleSignIn}
         className={`${
           showFinalLogoutConfirmation ? "animate-fade-out" : "animate-fade-in"
-        } flex h-9 items-center rounded-md bg-main-purple1 px-4 py-2 text-sm font-medium text-white transition-all duration-300 ease-in-out`}
+        } flex h-35 w-500 items-center rounded-md bg-main #EEE7FE border-2 border-black px-0.5 py-2 text-sm font-medium text-black transition ease-in-out delay-150 hover:-translate x-10 hover:scale-110 duration-300`}
       >
+        
+       
+        <Image src = "/google.png"  width = {25} height = {25} alt = 'logo'/>
        
         
-        Login
+        Login with Google 
       </button>
+      </div>
 
       {/* Logout Confirmation Popup */}
       {showLogoutConfirmation && (
@@ -144,11 +150,7 @@ const Navbar = () => {
             showFinalLogoutConfirmation ? "animate-fade-out" : "animate-fade-in"
           } logout-confirmation-overlay transition-opacity duration-300 ease-in-out`}
         >
-          <div className="logout-confirmation-content">
-            <h2>Are you sure you want to log out?</h2>
-            <button onClick={handleCancelLogout}>Cancel</button>
-            <button onClick={confirmLogout}>Logout</button>
-          </div>
+          
         </div>
       )}
 
@@ -161,15 +163,15 @@ const Navbar = () => {
             <h2>Are you really sure you want to log out?</h2>
             <button
               onClick={handleFinalLogoutCancel}
-              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center transition ease-in-out delay-150 hover:-translate x-10 hover:scale-110 duration-300"
             >
               Cancel
             </button>
             <button
               onClick={handleFinalLogout}
-              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center"
-            >
-              Logout
+              className="bg-red-500 hover:bg-red-600 text-white ml-5 font-bold py-2 px-4 rounded inline-flex items-center transition ease-in-out delay-150 hover:-translate x-10 hover:scale-110 duration-300 "
+                          >
+              Log Out
             </button>
           </div>
         </div>
