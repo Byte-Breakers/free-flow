@@ -14,17 +14,17 @@ async function getGenre(url) {
     const genre = $("h1").text();
     const genre1 = $("h2").text();
 
-    // Extract the URLs of the images in the webpage
-    const images = [];
-    $("img").each(function (i, img) {
-      images.push({
-        url: $(img).attr("src"),
-      });
-    });
+    // // Extract the URLs of the images in the webpage
+    // const images = [];
+    // $("img").each(function (i, img) {
+    //   images.push({
+    //     url: $(img).attr("src"),
+    //   });
+    // });
 
     console.log(genre);
-    //console.log(genre1);
-    console.log(images);
+    console.log(genre1);
+    //console.log(images);
     console.log("\n");
   } catch (error) {
     console.error(error);
