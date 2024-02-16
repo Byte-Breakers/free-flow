@@ -97,7 +97,7 @@ const Navbar = () => {
     };
   }, []);
 
-// ... (existing code)
+
 
 return (
   <div className="fixed top-0 flex h-14 w-full items-center justify-between border-b-2 border-main-purple1 border-opacity-10 bg-light-bg px-4">
@@ -114,12 +114,12 @@ return (
     {user && (
       <button
         onClick={() => setShowLogoutConfirmation(true)}
-        className="flex items-center p-2 rounded-full bg-white hover:bg-gray-100 focus:outline-none focus:ring border-2 border-black focus:border-main-purple1 transition-all duration-300 ease-in-out"
+        className="flex items-center py-2 rounded-full hover:bg-gray-100 focus:border-main-purple1 transition-all duration-300 ease-in-out"
       >
         <Image
-          src="/Profile.png"
-          width={25}
-          height={25}
+          src="/Latest_profile.png"
+          width={40}
+          height={40}
           alt="Profile Image"
           className="rounded-full"
         />
@@ -148,14 +148,19 @@ return (
         onClick={handleSignIn}
         className={`${
           showFinalLogoutConfirmation ? "animate-fade-out" : "animate-fade-in"
-        } flex h-175 w-200 items-center rounded-md bg-main #EEE7FE border-2 border-black px-0.5 py-2 text-m font-medium text-black transition ease-in-out delay-150 hover:- bg-white translate x-10 hover:scale-110 duration-300`}
-      >
+        } flex h-12 w-15 pr-5 items-center rounded-md bg-main-#EEE7FE border-2 border-black px-1 py-0 text-m font-medium text-black transition ease-in-out delay-150 hover:- translate x-10 hover:scale-110 duration-300`}
+      > 
+        <div className = "ml-5">
         <Image src="/google.png" width={25} height={25} alt="Google Logo" />
-        Login with Google
+        </div>
+        <div className="px-2">
+        Login
+        </div>
       </button>
     )}
 
     {/* Logout Confirmation Popup */}
+
     {showLogoutConfirmation && (
       <div
         className={`${
