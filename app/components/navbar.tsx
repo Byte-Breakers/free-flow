@@ -11,6 +11,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
+import { error } from "console";
+
 
 const Navbar = () => {
   const auth = getAuth(app);
@@ -19,7 +21,7 @@ const Navbar = () => {
   const [user, setUser] = useState<User | null>(null);
   const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
   const [showFinalLogoutConfirmation, setShowFinalLogoutConfirmation] = useState(false);
-  const [showProfileIcon , setShowProfileIcon] = useState(false);
+  
   
 
   // Use ref to manage profile popup visibility
@@ -80,6 +82,7 @@ const Navbar = () => {
 
   // Handle the click outside the profile popup to close it
   const handleClickOutsideProfilePopup = (e: MouseEvent) => {
+    
     if (profilePopupRef.current && !profilePopupRef.current.contains(e.target as Node)) {
       // Click outside the profile popup, close it
       setShowLogoutConfirmation(false);
@@ -110,7 +113,9 @@ return (
       </div>
     </Link>
 
-    {/* Profile Icon/Button */}
+  {/* Profile Icon/Button */}
+        
+      
     {user && (
       <button
         onClick={() => setShowLogoutConfirmation(true)}
@@ -148,17 +153,17 @@ return (
         onClick={handleSignIn}
         className={`${
           showFinalLogoutConfirmation ? "animate-fade-out" : "animate-fade-in"
-        } flex h-12 w-15 pr-5 items-center rounded-md bg-main-#EEE7FE border-2 border-black px-1 py-0 text-m font-medium text-black transition ease-in-out delay-150 hover:- translate x-10 hover:scale-110 duration-300`}
+        } flex h-12 w-15 pr-5 items-center rounded-md bg-main-#EEE7FE border-2 border-black px-1 py-0 text-m font-medium text-black transition ease-in-out delay-150 hover:- translate x-10 hover:scale-110 duration-300 hover:bg-[#E0E0E0]`}
       > 
         <div className = "ml-5">
         <Image src="/google.png" width={25} height={25} alt="Google Logo" />
         </div>
-        <div className="px-2">
+        <div className="px-2 font-bold">
         Login
         </div>
       </button>
     )}
-
+    
     {/* Logout Confirmation Popup */}
 
     {showLogoutConfirmation && (
@@ -180,7 +185,7 @@ return (
             onClick={handleFinalLogoutCancel}
             className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center transition ease-in-out delay-150 hover:-translate x-10 hover:scale-110 duration-300"
           >
-            Cancel
+            Cancel 
           </button>
           <button
             onClick={handleFinalLogout}
@@ -188,8 +193,9 @@ return (
           >
             Log Out
           </button>
+          </div>
         </div>
-      </div>
+      
     )}
   </div>
 );
