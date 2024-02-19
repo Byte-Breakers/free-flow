@@ -85,8 +85,11 @@ const HomePage = () => {
       <Navbar />
 
       {/* Headin */}
-      <h1 className='text-3xl mt-5 mb-2 font-semibold'>Search for your favorite Course</h1>
+       
 
+      <h1 className='text-3xl mt-5 mb-2 font-semibold'>Search for your favorite Course</h1>
+       
+ 
       {/* Search bar and button */}
       <form
         onSubmit={(e) => {
@@ -110,12 +113,13 @@ const HomePage = () => {
             }}
           />
         </div>
+       
 
         <div className="w-[2%] pl-3" /> {/* Gap */}
 
         <button // Clear Button
           type='reset'
-          className="rounded-md bg-white px-3 text-sm font-medium text-main-purple1 "
+          className="rounded-md bg-white px-3 text-sm font-medium text-main-purple1 transition ease-in-out delay-150 hover:- translate x-10 hover:scale-110 duration-300"
           onClick={handleClear}
         >Clear</button>
 
@@ -123,12 +127,12 @@ const HomePage = () => {
 
         <button // Search Button
           type="submit"
-          className="rounded-md bg-main-purple1 px-3 text-sm font-medium text-white"
+          className="rounded-md bg-main-purple1 px-3 text-sm font-medium text-white transition ease-in-out delay-150 hover:- translate x-10 hover:scale-110 duration-300"
         >
           Search
         </button>
       </form>
-
+     
       {/* The list of Courses is displayed as a list of LinkCard components */}
       <div className='md:grid md:grid-cols-2 gap-x-5 gap-y-2'>
 
@@ -146,6 +150,8 @@ const HomePage = () => {
 
       </div>
     </div>
+    
+    
   )
 }
 

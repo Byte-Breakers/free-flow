@@ -1,6 +1,5 @@
 "use client";
-import Image from "next/image";
-import { FiSearch } from "react-icons/fi";
+
 import Navbar from "./components/navbar";
 import { useState } from "react";
 import LandingPageDesktop from "./components/landingDesktop";

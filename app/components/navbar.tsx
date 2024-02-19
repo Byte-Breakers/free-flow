@@ -8,11 +8,9 @@ import {
   User,
 } from "firebase/auth";
 import Link from "next/link";
+import Image from "next/image"
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import { error } from "console";
-
 
 const Navbar = () => {
   const auth = getAuth(app);
@@ -21,8 +19,7 @@ const Navbar = () => {
   const [user, setUser] = useState<User | null>(null);
   const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
   const [showFinalLogoutConfirmation, setShowFinalLogoutConfirmation] = useState(false);
-  
-  
+  const [showUserInfo, setShowUserInfo] = useState(false);
 
   // Use ref to manage profile popup visibility
   const profilePopupRef = useRef<HTMLDivElement | null>(null);
@@ -30,6 +27,15 @@ const Navbar = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      if (currentUser) {
+        setShowUserInfo(true);
+        const timeoutId = setTimeout(() => {
+          setShowUserInfo(false);
+        }, 10000);
+
+        // Clear the timeout on component unmount or when the user changes
+        return () => clearTimeout(timeoutId);
+      }
     });
 
     return () => unsubscribe();
@@ -82,7 +88,6 @@ const Navbar = () => {
 
   // Handle the click outside the profile popup to close it
   const handleClickOutsideProfilePopup = (e: MouseEvent) => {
-    
     if (profilePopupRef.current && !profilePopupRef.current.contains(e.target as Node)) {
       // Click outside the profile popup, close it
       setShowLogoutConfirmation(false);
@@ -100,106 +105,101 @@ const Navbar = () => {
     };
   }, []);
 
+  return (
+    <div className="fixed top-0 flex h-14 w-full mr-auto items-center justify-between border-b-2 border-main-purple1 border-opacity-10 bg-light-bg px-4">
+      {/* Logo & Name */}
+      <Link href={"/"}>
+        <div className="flex h-full items-center cursor-pointer">
+          <Image width={50} height={50} src="/logo.svg" alt="Logo" />
+          <h1 className="ml-2 text-xl font-bold text-main-purple1">Free</h1>
+          <h1 className="text-xl font-bold text-[#F88F4F]">Flow</h1>
+        </div>
+      </Link>
 
-
-return (
-  <div className="fixed top-0 flex h-14 w-full items-center justify-between border-b-2 border-main-purple1 border-opacity-10 bg-light-bg px-4">
-    {/* Logo & Name */}
-    <Link href={"/"}>
-      <div className="flex h-full items-center cursor-pointer">
-        <Image width={50} height={50} src="/logo.svg" alt="Logo" />
-        <h1 className="ml-2 text-xl font-bold text-main-purple1">Free</h1>
-        <h1 className="text-xl font-bold text-[#F88F4F]">Flow</h1>
-      </div>
-    </Link>
-
-  {/* Profile Icon/Button */}
-        
-      
-    {user && (
-      <button
-        onClick={() => setShowLogoutConfirmation(true)}
-        className="flex items-center py-2 rounded-full hover:bg-gray-100 focus:border-main-purple1 transition-all duration-300 ease-in-out"
-      >
-        <Image
-          src="/Latest_profile.png"
-          width={40}
-          height={40}
-          alt="Profile Image"
-          className="rounded-full"
-        />
-      </button>
-    )}
-
-    {/* Profile Popup */}
-    {user ? (
-      <div
-        ref={profilePopupRef}
-        className={`${
-          showFinalLogoutConfirmation ? "animate-fade-in" : "animate-fade-out"
-        } fixed top-14 right-4 z-50 p-4 rounded-md shadow-md bg-white border-2 border-black transition-opacity duration-300 ease-in-out`}
-      >
-        <h2 className="mb-2">Welcome, {user.displayName}</h2>
-        <p className="text-black-600">{user.email}</p>
+      {/* Profile Icon/Button */}
+      {user && (
         <button
-          onClick={confirmLogout}
-          className="mt-2 inline-flex items-center px-3 py-2 rounded-md text-base font-medium text-red-600 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-300 ease-in-out"
+          onClick={() => setShowUserInfo(true)}
+          className="flex items-center py-2 rounded-full hover:bg-gray-100 focus:border-main-purple1 transition-all duration-300 ease-in-out"
         >
-          Logout
+          <Image
+            src="/Latest_profile.png"
+            width={40}
+            height={40}
+            alt="Profile Image"
+            className="rounded-full"
+          />
         </button>
-      </div>
-    ) : (
-      <button
-        onClick={handleSignIn}
-        className={`${
-          showFinalLogoutConfirmation ? "animate-fade-out" : "animate-fade-in"
-        } flex h-12 w-15 pr-5 items-center rounded-md bg-main-#EEE7FE border-2 border-black px-1 py-0 text-m font-medium text-black transition ease-in-out delay-150 hover:- translate x-10 hover:scale-110 duration-300 hover:bg-[#E0E0E0]`}
-      > 
-        <div className = "ml-5">
-        <Image src="/google.png" width={25} height={25} alt="Google Logo" />
-        </div>
-        <div className="px-2 font-bold">
-        Login
-        </div>
-      </button>
-    )}
-    
-    {/* Logout Confirmation Popup */}
+      )}
 
-    {showLogoutConfirmation && (
-      <div
-        className={`${
-          showFinalLogoutConfirmation ? "animate-fade-out" : "animate-fade-in"
-        } logout-confirmation-overlay transition-opacity duration-300 ease-in-out`}
-      ></div>
-    )}
-
-    {/* Final Logout Confirmation Popup */}
-    {showFinalLogoutConfirmation && (
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      {/* Profile Popup */}
+      {user ? (
         <div
-          className={`animate-fade-in logout-confirmation-overlay transition-opacity duration-300 ease-in-out text-center bg-white p-4 rounded-md shadow-md`}
+          ref={profilePopupRef}
+          className={`${
+            showUserInfo ? "animate-fade-in" : "animate-fade-out"
+          } fixed top-14 right-4 z-50 p-4 rounded-md shadow-md bg-white border-2 border-black transition-opacity duration-300 ease-in-out`}
         >
-          <h2>Are you really sure you want to log out?</h2>
+          <h2 className="mb-2">Welcome, {user.displayName}</h2>
+          <p className="text-black-600">{user.email}</p>
           <button
-            onClick={handleFinalLogoutCancel}
-            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center transition ease-in-out delay-150 hover:-translate x-10 hover:scale-110 duration-300"
+            onClick={confirmLogout}
+            className="mt-2 inline-flex items-center px-3 py-2 rounded-md text-base font-medium text-red-600 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-300 ease-in-out"
           >
-            Cancel 
+            Logout
           </button>
-          <button
-            onClick={handleFinalLogout}
-            className="bg-red-500 hover:bg-red-600 text-white ml-5 font-bold py-2 px-4 rounded inline-flex items-center transition ease-in-out delay-150 hover:-translate x-10 hover:scale-110 duration-300"
+          
+         
+        </div>
+      ) : (
+        <button
+          onClick={handleSignIn}
+          className={`${
+            showFinalLogoutConfirmation ? "animate-fade-out" : "animate-fade-in"
+          } flex h-12 w-15 pr-5 items-center rounded-md bg-main-#EEE7FE border-2 border-black px-1 py-0 text-m font-medium text-black transition ease-in-out delay-150 hover:- translate x-10 hover:scale-110 duration-300 hover:bg-[#E0E0E0]`}
+        >
+          <div className="ml-5">
+            <Image src="/google.png" width={25} height={25} alt="Google Logo" />
+          </div>
+          <div className="px-2 font-bold">
+            Login
+          </div>
+        </button>
+      )}
+
+      {/* Logout Confirmation Popup */}
+      {showLogoutConfirmation && (
+        <div
+          className={`${
+            showFinalLogoutConfirmation ? "animate-fade-out" : "animate-fade-in"
+          } logout-confirmation-overlay transition-opacity duration-300 ease-in-out`}
+        ></div>
+      )}
+
+      {/* Final Logout Confirmation Popup */}
+      {showFinalLogoutConfirmation && (
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <div
+            className={`animate-fade-in logout-confirmation-overlay transition-opacity duration-300 ease-in-out text-center bg-white p-4 rounded-md shadow-md`}
           >
-            Log Out
-          </button>
+            <h2>Are you really sure you want to log out?</h2>
+            <button
+              onClick={handleFinalLogoutCancel}
+              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center transition ease-in-out delay-150 hover:-translate x-10 hover:scale-110 duration-300"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleFinalLogout}
+              className="bg-red-500 hover:bg-red-600 text-white ml-5 font-bold py-2 px-4 rounded inline-flex items-center transition ease-in-out delay-150 hover:-translate x-10 hover:scale-110 duration-300"
+            >
+              Log Out
+            </button>
           </div>
         </div>
-      
-    )}
-  </div>
-);
-
+      )}
+    </div>
+  );
 };
 
 export default Navbar;
