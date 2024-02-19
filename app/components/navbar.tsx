@@ -138,7 +138,7 @@ const Navbar = () => {
           ref={profilePopupRef}
           className={`${
             showUserInfo ? "animate-fade-in" : "animate-fade-out"
-          } fixed top-14 right-4 z-50 p-4 rounded-md shadow-md bg-white border-2 border-black transition-opacity duration-300 ease-in-out`}
+          } fixed top-14 right-4 z-50 p-4 rounded-md shadow-md bg-main-purple-1 border-2 border-main-purple-1 border-opacity-5  transition-opacity duration-300 ease-in-out hover:bg-white`}
         >
           <h2 className="mb-2">Welcome, {user.displayName}</h2>
           <p className="text-black-600">{user.email}</p>
