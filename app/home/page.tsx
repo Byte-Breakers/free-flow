@@ -50,7 +50,7 @@ const HomePage = () => {
       // the output by the ai is a string of comma separated links. We separate each link and push it to an array
       generatedText.split(',').forEach((link) => {
         parsedLinks.push({
-          title: link, // TO BE CHANGED - Ankith
+          title: link, 
           url: link,
           // thumbnail: '',
         });
