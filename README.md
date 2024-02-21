@@ -1,3 +1,28 @@
+Freeflow Learning: Empowering Free Education
+
+This project, created by our team, is a full-fledged website named Freeflow Learning that generates free courses tailored to your specific needs and interests.
+
+Core Objective:
+
+1) Provide users with personalized access to free online courses based on their individual queries and requests.
+2) Create a central platform where all learning resources related to a particular topic are easily discoverable.
+
+
+User Experience:
+
+1) Login: Start by clicking the "Login" button to authenticate yourself using your Google account. Google Firebase securely handles the      backend login process.
+2) Course Search: Upon successful login, the homepage presents a search bar where you can type any course you're interested in. Relevant links to those courses will be dynamically generated and displayed.
+3) Course Cards: Generated links are conveniently presented as cards for optimal readability and easy browsing.
+4) Logout: Once finished, you can seamlessly log out from the website with a two-step verification process confirming your exit.
+
+Tech Stack:
+
+1) Frontend: Next.js (TypeScript & TSX) with Tailwind CSS
+2) Backend: Google Firebase (User Login)
+3) Course Link Generation: Gemini API (powered by Google)
+
+Getting Started:
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
